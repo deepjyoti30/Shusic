@@ -1,6 +1,6 @@
 import os
 from random import randint
-path = input("Enter the path. Please add a \ after the address\n")
+path = input("Enter the path.\n")
 f = open(path+"\log", "w+")
 f.close()
 
