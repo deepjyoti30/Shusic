@@ -1,5 +1,5 @@
 # Shusic
-A Script Which Shuffles Music.
+A Simple Script Which Shuffles Music.
 ## Requirements
 Python Should Be Preinstalled.
 ## Note 
