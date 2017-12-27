@@ -1,4 +1,5 @@
 import os
+import sys
 from random import randint
 path = input("Enter the path.\n")
 f = open(path+"\log", "w+")
@@ -30,7 +31,7 @@ def GenerateList():                                         #Generates the playi
             na = int(countFiles())
             if na == 0:
                 input("No mp3 files found\nClosing script now!")
-                exit
+                return False
             count = 0
             while True:                                                                                  
                 i = randint(0,na)
@@ -57,20 +58,21 @@ def Play():                                                         #Plays song 
             pos = no.find(",")
             i = 0
             for files in os.listdir(path):
-                if str(i) == no[:pos]:
-                    print("\nYou will listen to  "+files)
-                    os.startfile(path+files)
-                    break
                 if files.endswith(".mp3"):
-                    i += 1
+                    if str(i) == no[:pos]:
+                        print("\nYou will listen to  "+files)
+                        os.startfile(path+"\\"+files)
+                        break
+                    else:
+                        i += 1
         user = input("\nPress any key to play next and exit to exit the script")
         if user == "exit":
             log.close()
             os.remove(path+"\log")
             print("\nPlease Close the music player!\n")
             input("Thanks for using the script! Hope you liked it!")
-            sys.exit
+            return 0
 
 countFiles()
-GenerateList()
-Play()
+if GenerateList() == True:
+    Play()
