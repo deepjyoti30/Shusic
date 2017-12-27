@@ -1,5 +1,4 @@
 import os
-import sys
 from random import randint
 path = input("Enter the path.\n")
 f = open(path+"\log", "w+")
@@ -69,10 +68,10 @@ def Play():                                                         #Plays song 
         if user == "exit":
             log.close()
             os.remove(path+"\log")
-            print("\nPlease Close the music player!\n")
-            input("Thanks for using the script! Hope you liked it!")
             return 0
 
 countFiles()
 if GenerateList() == True:
     Play()
+    os.system("TASKKILL /F /IM Music.UI.exe")
+input("Thanks for using the script! Hope you liked it!")
