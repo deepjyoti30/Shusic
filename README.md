@@ -7,3 +7,5 @@ A Simple Script Which Shuffles Music.
 Python Should Be Preinstalled.
 
 Groove Music.
+
+Just run the script.
