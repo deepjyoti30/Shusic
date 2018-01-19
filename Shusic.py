@@ -67,6 +67,32 @@ def checkDB():
     mkFile.close()
     return False
 
+def askForPath():
+    #This one asks the user which path to search for songs.
+    while True:
+        print("\n\t\t\t\tBy default the path to search songs is set to E:\\")
+        prompt = input("\t\t\t\tWould you like to change it to something else? [Y/n]")
+        if prompt == "Y" or prompt == "y" :
+            tempPath = input("\t\t\t\tEnter the path.")
+            tempPath += "\\"
+            if checkIfPathExists(tempPath) :
+                masterPath = tempPath 
+                break
+        elif prompt == "n" or prompt == "N" :
+            masterPath = "E:\\"
+            break
+        else:
+            print("\t\t\t\tEnter a valid command")
+    return masterPath
+
+def checkIfPathExists(path):
+    #This will check if the entered path exists or not
+    if os.path.isdir(path) :
+        return True
+    else:
+        print("\t\t\t\tNo such folder exists!\a")
+        return False
+
 def scanFiles(path):
     path += "\\"
     for file in os.listdir(path):
@@ -203,15 +229,15 @@ def main():
     print("\t\t\t\t=============================================================\n\n")
     if checkDB():
         print("\t\t\t\tExisting Database of songs found.")
-        prompt = input("\t\t\t\tDo you want to recreate the database? [Y,n]\n\t\t\t\t")
+        prompt = input("\t\t\t\tDo you want to recreate the database? [Y,(Just press any key)]\n\t\t\t\t")
         if prompt == "Y":
             os.remove(dbpath+"SongList.db")
             havePatience("Database")
-            scanFiles(masterPath)
+            scanFiles(askForPath())
     else:
         print("\t\t\t\tSong Database not found.")
         havePatience("Database")
-        scanFiles(masterPath)
+        scanFiles(askForPath())
     if not(checkValid()):
         print("\t\t\t\tWe could not find any songs in your pc.")
         print("\t\t\t\tPlease add some and run Shusic again.")
