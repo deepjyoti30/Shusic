@@ -81,14 +81,16 @@ def scanFiles(path):
             thread.start()
             thread.join()
 
-"""def animate():                                                       #Animation of loading
-    for c in itertools.cycle(["|", "/", "--", "\\"]):
-        if done:
-            break
-        sys.stdout.write("\r\t\t\t\t\tMaking a queue " + c)
-        sys.stdout.flush()
-        time.sleep(0.1)
-    sys.stdout.flush()"""
+"""def animate(count, bw, limForProgress, flag):
+    if count - bw >= limForProgress:
+                bw += limForProgress
+                if bw == limForProgress :
+                    print("| █", end = "", flush=True)
+                    flag += 1
+                else :
+                    print("█", end = "", flush=True)
+                    flag += 1    """                                                   #Animation of loading
+    
 
 
 def countFiles():      
@@ -115,7 +117,10 @@ def Check(gen_no):                                      #Check if the no is alre
             return False
 
 def GenerateList():
-        #_thread.start_new_thread(animate, ())
+        bw = 0
+        limForProgress = 18
+        flag = 0 #This one to make the progress bar look proper
+        print("\n\t\t\t\t", end = "")
         count = 0      #Variable to keep track of list range
         #Make the log file that will keep the songs numbers
         log = open(dbpath+"log", "w+")
@@ -128,16 +133,33 @@ def GenerateList():
                 openLog = open(dbpath+"log", "a+")
                 openLog.write(str(i)+"\n")
                 openLog.close()
-                count  += 1
-        done = True
+                if count - bw >= limForProgress:
+                    bw += limForProgress
+                    if bw == limForProgress :
+                        print("| █", end = "", flush=True)
+                        flag += 1
+                    else :
+                        print("█", end = "", flush=True)
+                        flag += 1
+            count  += 1
+        if flag <= 10:
+            left = 10 - flag
+            while left != 1:
+                print("█", end = "", flush=True)
+                left -= 1
+            print("█ |", end = "", flush=True)
+        else:
+            print("█ |", end = "", flush=True) 
 
 def Play(song):
+    songToplay = song[:-1] #\n removed from the string
+    start = time.time()
     rev = song[::-1]
     pos = rev.find("\\")
     name = rev[:pos]
     Name = name[::-1]
-    print("\t\t\t\t  Playing "+Name)
-    os.startfile(song[:-1])
+    print("\t\t\t\tPlaying "+Name)
+    os.startfile(songToplay)
 
 def find(playType):                                 #Plays song by reading them from the queue acc to playType
     if playType == "Shuffle":                                                
@@ -154,8 +176,7 @@ def find(playType):                                 #Plays song by reading them 
                 song = giveLine(dbpath+"SongList.db", int(no))
                 Play(song)
                 #input("Press any key to play next!")
-                user = input("\n\t\t\t\tPress any key to play next and exit to exit the script : ")
-                print("\n")
+                user = input("\t\t\t\tPress any key to play next and exit to exit the script : ")
                 if user == "exit":
                     log.close()
                     os.remove(dbpath+"\log")
@@ -169,11 +190,8 @@ def find(playType):                                 #Plays song by reading them 
                 break
             Play(song)
             i += 1
-            user = input("\n\t\t\t\tPress any key to play next and exit to exit the script :")
-            print("\n")
+            user = input("\t\t\t\tPress any key to play next and exit to exit the script :")
             if user == "exit":
-                log.close()
-                os.remove(path+"\log")
                 return 0
                 
 
@@ -210,7 +228,7 @@ def main():
         if ch == "1":
             havePatience("Playlist")
             GenerateList()
-            input("\t\t\t\tPress Any key to continue!")
+            input("\n\t\t\t\tPress Any key to continue!")
             if find("Shuffle") == 0:
                 break
         elif ch == "2":
