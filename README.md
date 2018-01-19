@@ -1,11 +1,13 @@
 # Shusic
 
-A Simple Script Which Shuffles Music.
+A Simple Script For Playing Music With Some Added Functionality.
 
-## Requirements
+## Highlights
 
-Python Should Be Preinstalled.
+An Unique Shuffle Logic. 
 
-Groove Music.
+### Requirements
 
-Just run the script.
+Python 3.x Should Be Preinstalled.
+
+Groove Music(For Now).
