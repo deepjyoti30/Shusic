@@ -106,7 +106,6 @@ def checkIfPathExists(path):
 def scanFiles(path):
     path += "\\"
     for file in os.listdir(path):
-        # print("Checking in "+file)
         if file.endswith(".mp3"):
             # Write the name to db
             db = open(dbpath + "SongList.db", "a+")
@@ -116,18 +115,6 @@ def scanFiles(path):
             thread = MyThread(path + file)
             thread.start()
             thread.join()
-
-
-"""def animate(count, bw, limForProgress, flag):
-    if count - bw >= limForProgress:
-                bw += limForProgress
-                if bw == limForProgress :
-                    print("| █", end = "", flush=True)
-                    flag += 1
-                else :
-                    print("█", end = "", flush=True)
-                    flag += 1    """  # Animation of loading
-
 
 def countFiles():
     noOffiles = 0  # Will count the no of files present in the file
@@ -200,11 +187,11 @@ def find(playType):  # Plays song by reading them from the queue acc to playType
                 os.remove(dbpath + "\log")
                 input("Done Playing!!")
                 return False
-
+                
             else:
                 song = giveLine(dbpath + "SongList.db", int(no))
                 Play(song)
-                # input("Press any key to play next!")
+                
                 user = input("\t\t\tPress any key to play next and exit to exit the script : ")
                 if user == "exit":
                     log.close()
@@ -235,7 +222,7 @@ def Shusic():
     print("\t\t\t█              ||  ||      ||  ||      ||            ||   ||   ||          █")
     print("\t\t\t█              ||  ||      ||  ||      ||            ||   ||   ||          █")
     print("\t\t\t█              ||  ||      ||  ||      ||            ||   ||   ||          █")
-    print("\t\t\t█   =============  ||      ||   ========  ============= ======  ========== █")
+    print("\t\t\t█   =============  ||      ||  =========  ============= ======  ========== █")
     print("\t\t\t█                                                                          █")
     print("\t\t\t█                                                             -deepjyoti30 █")
     print("\t\t\t████████████████████████████████████████████████████████████████████████████")
@@ -243,11 +230,7 @@ def Shusic():
 
 
 def main():
-    # This will give the menu of the player
-    """print("\t\t\t=============================================================")
-    print("\t\t\t|                          SHUSIC                           |")
-    print("\t\t\t|                                               -deepjyoti30|")
-    print("\t\t\t=============================================================\n\n")"""
+
     Shusic()
     print("\n")
     if checkDB():
@@ -277,7 +260,6 @@ def main():
         if ch == "1":
             havePatience("Playlist")
             GenerateList()
-            # input("\n\t\t\tPress Any key to continue!")
             os.system("cls")
             print("\n")
             Shusic()
