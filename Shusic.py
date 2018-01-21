@@ -20,8 +20,8 @@ masterPath = "E:\\"
 dbpath = "C:\\Database\\"  #database path
 
 def havePatience(keyWord):
-    print("\t\t\t\tCreating "+keyWord+" ....")
-    print("\t\t\t\tThis might take some time depending on your amount of files")
+    print("\t\t\tCreating "+keyWord+" ....")
+    print("\t\t\tThis might take some time depending on your amount of files")
 
 def giveLine(path, lineNO):
     #This reads the given line no from the given file
@@ -71,10 +71,10 @@ def checkDB():
 def askForPath():
     #This one asks the user which path to search for songs.
     while True:
-        print("\n\t\t\t\tBy default the path to search songs is set to E:\\")
-        prompt = input("\t\t\t\tWould you like to change it to something else? [Y/n]")
+        print("\n\t\t\tBy default the path to search songs is set to E:\\")
+        prompt = input("\t\t\tWould you like to change it to something else? [Y/n]")
         if prompt == "Y" or prompt == "y" :
-            tempPath = input("\t\t\t\tEnter the path.")
+            tempPath = input("\t\t\tEnter the path.")
             tempPath += "\\"
             if checkIfPathExists(tempPath) :
                 masterPath = tempPath 
@@ -83,7 +83,7 @@ def askForPath():
             masterPath = "E:\\"
             break
         else:
-            print("\t\t\t\tEnter a valid command")
+            print("\t\t\tEnter a valid command")
     return masterPath
 
 def checkIfPathExists(path):
@@ -91,7 +91,7 @@ def checkIfPathExists(path):
     if os.path.isdir(path) :
         return True
     else:
-        print("\t\t\t\tNo such folder exists!\a")
+        print("\t\t\tNo such folder exists!\a")
         return False
 
 def scanFiles(path):
@@ -147,7 +147,7 @@ def GenerateList():
         bw = 0
         limForProgress = 20
         flag = 0 #This one to make the progress bar look proper
-        print("\n\t\t\t\t", end = "")
+        print("\n\t\t\t", end = "")
         count = 0      #Variable to keep track of list range
         #Make the log file that will keep the songs numbers
         log = open(dbpath+"log", "w+")
@@ -160,9 +160,9 @@ def GenerateList():
                 openLog = open(dbpath+"log", "a+")
                 openLog.write(str(i)+"\n")
                 openLog.close()
-                if count - bw >= 35:
+                if count - bw >= (last/10):
                     bw += limForProgress
-                    sys.stdout.write("\r\t\t\t\t")
+                    sys.stdout.write("\r\t\t\t")
                     sys.stdout.write("%d%%  | %-20s |" %(flag*5, "█"*flag))
                     sys.stdout.flush()
                     flag += 1
@@ -175,7 +175,7 @@ def Play(song):
     pos = rev.find("\\")
     name = rev[:pos]
     Name = name[::-1]
-    print("\t\t\t\tPlaying "+Name)
+    print("\t\t\tPlaying "+Name)
     os.startfile(songToplay)
 
 def find(playType):                                 #Plays song by reading them from the queue acc to playType
@@ -193,7 +193,7 @@ def find(playType):                                 #Plays song by reading them 
                 song = giveLine(dbpath+"SongList.db", int(no))
                 Play(song)
                 #input("Press any key to play next!")
-                user = input("\t\t\t\tPress any key to play next and exit to exit the script : ")
+                user = input("\t\t\tPress any key to play next and exit to exit the script : ")
                 if user == "exit":
                     log.close()
                     os.remove(dbpath+"\log")
@@ -207,51 +207,75 @@ def find(playType):                                 #Plays song by reading them 
                 break
             Play(song)
             i += 1
-            user = input("\t\t\t\tPress any key to play next and exit to exit the script :")
+            user = input("\t\t\tPress any key to play next and exit to exit the script :")
             if user == "exit":
                 return 0
-                
+
+def Shusic():
+    print("\t\t\t████████████████████████████████████████████████████████████████████████████")
+    print("\t\t\t█                                                                          █")
+    print("\t\t\t█   =============  ||      ||  ||      || ============= ======  ========== █", flush=True)
+    print("\t\t\t█   ||             ||      ||  ||      || ||              ||   ||          █", flush=True)
+    print("\t\t\t█   ||             ||      ||  ||      || ||              ||   ||          █",flush=True)
+    print("\t\t\t█   ||             ||      ||  ||      || ||              ||   ||          █",flush=True)
+    print("\t\t\t█   =============  ==========  ||      || =============   ||   ||          █",flush=True)
+    print("\t\t\t█              ||  ||      ||  ||      ||            ||   ||   ||          █",flush=True)
+    print("\t\t\t█              ||  ||      ||  ||      ||            ||   ||   ||          █",flush=True)
+    print("\t\t\t█              ||  ||      ||  ||      ||            ||   ||   ||          █",flush=True)
+    print("\t\t\t█   =============  ||      ||  =========  ============= ======  ========== █",flush=True)
+    print("\t\t\t█                                                                          █")
+    print("\t\t\t█                                                             -deepjyoti30 █")    
+    print("\t\t\t████████████████████████████████████████████████████████████████████████████") 
+    print("\n")   
 
 def main():
     #This will give the menu of the player
-    print("\t\t\t\t=============================================================")
-    print("\t\t\t\t|                          SHUSIC                           |")
-    print("\t\t\t\t|                                               -deepjyoti30|")
-    print("\t\t\t\t=============================================================\n\n")
+    """print("\t\t\t=============================================================")
+    print("\t\t\t|                          SHUSIC                           |")
+    print("\t\t\t|                                               -deepjyoti30|")
+    print("\t\t\t=============================================================\n\n")"""
+    Shusic()
+    print("\n")
     if checkDB():
-        print("\t\t\t\tExisting Database of songs found.")
-        prompt = input("\t\t\t\tDo you want to recreate the database? [Y,(Just press any key)]\n\t\t\t\t")
+        print("\t\t\tExisting Database of songs found.")
+        prompt = input("\t\t\tDo you want to recreate the database? [Y,(Just press any key)]\n\t\t\t")
         if prompt == "Y":
             os.remove(dbpath+"SongList.db")
             havePatience("Database")
             scanFiles(askForPath())
     else:
-        print("\t\t\t\tSong Database not found.")
+        print("\t\t\tSong Database not found.")
         havePatience("Database")
         scanFiles(askForPath())
     if not(checkValid()):
-        print("\t\t\t\tWe could not find any songs in your pc.")
-        print("\t\t\t\tPlease add some and run Shusic again.")
+        print("\t\t\tWe could not find any songs in your pc.")
+        print("\t\t\tPlease add some and run Shusic again.")
         return False
     ch = ""
     while ch != "3":
-        print("\n\t\t\t\t------------------------------------------------------------")
-        print("\t\t\t\t 1. Shuffle")
-        print("\t\t\t\t 2. Just Play")
-        print("\t\t\t\t 3. Exit")
-        print("\t\t\t\t------------------------------------------------------------")
-        ch = input("\t\t\t\tEnter Your choice: ")
+        print("\n\t\t\t------------------------------------------------------------")
+        print("\t\t\t 1. Shuffle")
+        print("\t\t\t 2. Just Play")
+        print("\t\t\t 3. Exit")
+        print("\t\t\t------------------------------------------------------------")
+        ch = input("\t\t\tEnter Your choice: ")
         print("\n")
         if ch == "1":
             havePatience("Playlist")
             GenerateList()
-            input("\n\t\t\t\tPress Any key to continue!")
+            #input("\n\t\t\tPress Any key to continue!")
+            os.system("cls")
+            print("\n")
+            Shusic()
             if find("Shuffle") == 0:
                 break
         elif ch == "2":
+            os.system("cls")
+            print("\n")
+            Shusic()
             if find("Play") == 0:
                 break
 
 main()
-input("\t\t\t\tThanks for using the script! Hope you liked it!")
+input("\t\t\tThanks for using the script! Hope you liked it!")
 os.system("TASKKILL /F /IM Music.UI.exe")
