@@ -3,6 +3,7 @@ import _thread
 import os
 import threading
 from random import randint
+import sys
 
 class MyThread(threading.Thread):
     def __init__(self, pathToScan):
@@ -144,7 +145,7 @@ def Check(gen_no):                                      #Check if the no is alre
 
 def GenerateList():
         bw = 0
-        limForProgress = 18
+        limForProgress = 20
         flag = 0 #This one to make the progress bar look proper
         print("\n\t\t\t\t", end = "")
         count = 0      #Variable to keep track of list range
@@ -159,23 +160,13 @@ def GenerateList():
                 openLog = open(dbpath+"log", "a+")
                 openLog.write(str(i)+"\n")
                 openLog.close()
-                if count - bw >= limForProgress:
+                if count - bw >= 35:
                     bw += limForProgress
-                    if bw == limForProgress :
-                        print("| █", end = "", flush=True)
-                        flag += 1
-                    else :
-                        print("█", end = "", flush=True)
-                        flag += 1
-            count  += 1
-        if flag <= 10:
-            left = 10 - flag
-            while left != 1:
-                print("█", end = "", flush=True)
-                left -= 1
-            print("█ |", end = "", flush=True)
-        else:
-            print("█ |", end = "", flush=True) 
+                    sys.stdout.write("\r\t\t\t\t")
+                    sys.stdout.write("%d%%  | %-20s |" %(flag*5, "█"*flag))
+                    sys.stdout.flush()
+                    flag += 1
+            count  += 1 
 
 def Play(song):
     songToplay = song[:-1] #\n removed from the string
