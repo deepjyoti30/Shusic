@@ -230,7 +230,8 @@ def Shusic():
 
 
 def main():
-
+    os.system("cls")
+    print("");
     Shusic()
     print("\n")
     if checkDB():
@@ -250,7 +251,7 @@ def main():
         return False
     ch = ""
     while ch != "3":
-        print("\n\t\t\t------------------------------------------------------------")
+        print("\t\t\t------------------------------------------------------------")
         print("\t\t\t 1. Shuffle")
         print("\t\t\t 2. Just Play")
         print("\t\t\t 3. Exit")
